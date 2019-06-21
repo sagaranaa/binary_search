@@ -4,15 +4,15 @@ int n;
 int k;
 int A[100000];
 
-unsigned int p(int total_bags, int people, int size_bag){
+unsigned int p(int m){
   int current_bags = 0;
   int i;
 
-  for (i=0;i<people;i++){
-    current_bags += (A[i] + size_bag - 1)/size_bag;
+  for (i=0;i<n;i++){
+    current_bags += (A[i] + m - 1)/m;
   }
 
-  return(current_bags <= total_bags);
+  return(current_bags <= k);
 }
 
 int main(){
@@ -22,10 +22,10 @@ int main(){
     scanf("%d", &A[i]);
   }
   lb = 0;
-  ub = A[i-1] + 1;
+  ub = 1000000000;
   while (ub - lb > 1){
     int m = (ub + lb) / 2;
-    if (p(k, n, m))ub = m;
+    if (p(m))ub = m;
     else lb = m;
   }
 

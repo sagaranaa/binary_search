@@ -4,6 +4,16 @@ int n;
 int k;
 int A[100000];
 
+unsigned int p(int m){
+  int current_sticks = 0;
+  int i;
+
+  for(i=0;i<n;i++){
+    current_sticks += A[i] / m;
+  }
+
+  return(current_sticks < k);
+}
 
 int main(){
   int i, lb, ub;
@@ -12,14 +22,15 @@ int main(){
     scanf("%d", &A[i]);
   }
 
-  lb = -1;
-  ub = n;
-  while(ub - lb > 1){
-    int m = (lb + ub) / 2;
-    if(A[m] >= k) ub = m;
+  lb = 0;
+  ub = 1000000001;
+  while (ub - lb > 1){
+    int m = (ub + lb) / 2;
+    if (p(m))ub = m;
     else lb = m;
   }
 
-  printf("%d\n", ub);
+  printf("%d\n", lb);
+
   return 0;
 }
